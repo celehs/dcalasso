@@ -1,0 +1,15 @@
+template:
+  params:
+    bootswatch: spacelab
+
+navbar:
+  type: inverse
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Examples"
+      href: articles/examples.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "GitHub"
+      href: https://github.com/celehs/dcalasso
