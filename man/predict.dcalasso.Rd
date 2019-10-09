@@ -4,12 +4,14 @@
 \alias{predict.dcalasso}
 \title{Prediction of dcalasso object}
 \usage{
-\method{predict}{dcalasso}(object, ...)
+\method{predict}{dcalasso}(object, newdata, type)
 }
 \arguments{
 \item{object}{a dcalasso object}
 
-\item{...}{...}
+\item{newdata}{a new data frame}
+
+\item{type}{"terms", "link", "response" same as predict.glm}
 }
 \description{
 \code{predict.dcalasso} makes prediction of a dcalasso object based on the adaptive lasso estimation.

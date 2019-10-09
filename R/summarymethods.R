@@ -124,12 +124,11 @@ coef.dcalasso = function(object, unpen=F, ...){
 #'
 #' \code{predict.dcalasso} makes prediction of a dcalasso object based on the adaptive lasso estimation.
 #' @param object a dcalasso object
-#' @param ... ...
-# @param newdata a new data frame
-# @param type "terms", "link", "response" same as predict.glm
+#' @param newdata a new data frame
+#' @param type "terms", "link", "response" same as predict.glm
 #' @export
 #' @author Yan Wang, Tianxi Cai, Chuan Hong
-predict.dcalasso = function(object, ...){
+predict.dcalasso = function(object, newdata, type){
   Terms = delete.response(object$Terms)
   m = model.frame(Terms, newdata)
   X = model.matrix(Terms, m)
