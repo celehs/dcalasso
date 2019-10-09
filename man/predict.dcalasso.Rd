@@ -4,7 +4,7 @@
 \alias{predict.dcalasso}
 \title{Prediction of dcalasso object}
 \usage{
-\method{predict}{dcalasso}(object, newdata, type)
+\method{predict}{dcalasso}(object, newdata, type = "link")
 }
 \arguments{
 \item{object}{a dcalasso object}
