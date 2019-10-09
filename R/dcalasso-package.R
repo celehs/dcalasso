@@ -16,8 +16,21 @@
 #' @author Yan Wang  \email{yaw719@mail.harvard.edu}, Tianxi Cai \email{tcai@hsph.harvard.edu}, Chuan Hong <Chuan_Hong@hms.harvard.edu>
 #' @references
 #' the paper
-#' @import stats survival mgcv glmnet doParallel foreach MASS
+#' @import survival mgcv glmnet doParallel foreach MASS
 #' @importFrom graphics plot
+#' @importFrom stats delete.response 
+#' @importFrom stats model.extract
+#' @importFrom stats model.frame
+#' @importFrom stats model.matrix
+#' @importFrom stats model.offset
+#' @importFrom stats model.weights
+#' @importFrom stats pnorm
+#' @importFrom stats predict
+#' @importFrom stats printCoefmat
+#' @importFrom stats rexp
+#' @importFrom stats runif
+#' @importFrom stats rweibull
+#' @importFrom stats terms
 #' @useDynLib dcalasso
 #' @keywords divide-and-conquer least square approximation
 NULL

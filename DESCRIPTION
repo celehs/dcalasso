@@ -11,10 +11,10 @@ Description: divideconquer package reduces the computational burden of fitting l
 URL: https://github.com/celehs/dcalasso
 BugReports: https://github.com/celehs/dcalasso/issues
 License: GPL-3
-Imports: survival, mgcv, glmnet, doParallel, foreach, MASS
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Depends: survival, mgcv, glmnet, doParallel, foreach, MASS
 Suggests: 
     knitr,
     rmarkdown
