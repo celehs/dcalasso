@@ -128,7 +128,7 @@ coef.dcalasso = function(object, unpen=F, ...){
 #' @param type "terms", "link", "response" same as predict.glm
 #' @export
 #' @author Yan Wang, Tianxi Cai, Chuan Hong
-predict.dcalasso = function(object, newdata, type){
+predict.dcalasso = function(object, newdata, type = 'link'){
   Terms = delete.response(object$Terms)
   m = model.frame(Terms, newdata)
   X = model.matrix(Terms, m)
