@@ -33,11 +33,6 @@ require(dcalasso)
 
 # Key function
 
-```
-dcalasso(formula, family=cox.ph(), data = NULL, data.rds = NULL, weights, subsets, na.action, 
-  offset, lambda = 10^seq(-10, 3, 0.01), gamma = 1, K = 20, iter.os = 2, ncores = 1)
-```
-
 ```r
 dcalasso(formula, family=cox.ph(), data = NULL, data.rds = NULL, weights, subsets, na.action, 
   offset, lambda = 10^seq(-10,3,0.01), gamma = 1, K = 20, iter.os = 2, ncores = 1)
