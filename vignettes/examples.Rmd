@@ -87,11 +87,11 @@ bb = c(rep(0.4,4),rep(0.2,4),rep(0.1,4),rep(0.05,4))
 beta0 = c(1, bb, rep(0, p.x - length(bb)))
 dat.mat0 = as.data.frame(SIM.FUN(N, p.x = p.x, cor = cor, family='Cox',beta0 = beta0))
 dat.mat0[,'strat'] = rep(1:20, each = N/20)
-dir = "C:/"
+dir = getwd()
 ll = split(1:N, factor(1:10))
 for (kk in 1: 10){
   df = dat.mat0[ll[[kk]],]
-  saveRDS(df, file = paste0(dir,'dataTI',kk,'.rds'))
+  saveRDS(df, file = paste0(dir,'/dataTI',kk,'.rds'))
 }
 
 ## Without strata
