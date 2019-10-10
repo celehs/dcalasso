@@ -26,9 +26,9 @@ The authors of the [methodological paper](https://arxiv.org/pdf/1804.00735.pdf) 
 # Installation
 
 ```r
-require(devtools)
-install_github("celehs/dcalasso")
-require(dcalasso)
+# install.packages("devtools")
+devtools::install_github("celehs/dcalasso")
+library(dcalasso)
 ```
 
 # Key function
