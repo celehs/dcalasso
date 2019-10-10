@@ -31,7 +31,7 @@
 #' @importFrom stats runif
 #' @importFrom stats rweibull
 #' @importFrom stats terms
-#' @useDynLib dcalasso
+#' @useDynLib dcalasso, .registration = TRUE
 #' @keywords divide-and-conquer least square approximation
 NULL
 
