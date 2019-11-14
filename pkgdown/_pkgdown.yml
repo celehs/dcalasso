@@ -7,8 +7,6 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Examples"
-      href: articles/examples.html
     - text: "Reference"
       href: reference/index.html
     - text: "GitHub"

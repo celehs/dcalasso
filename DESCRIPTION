@@ -4,8 +4,12 @@ Title: Divide-and-conquer adaptive lasso for big data
 Version: 0.1.0
 Authors@R: c(
     person("Yan", "Wang", role = c("aut", "cre"), email = "yaw719@mail.harvard.edu"),
-    person("Tianxi", "Cai", role = c("aut")),
-    person("Chuan", "Hong", role = c("aut"))
+    person("Chuan", "Hong", role = c("aut")),
+    person("Nathan", "Palmer", role = c("aut")),
+    person("Qian", "Di", role = c("aut")),
+    person("Joel", "Schwartz", role = c("aut")),
+    person("Isaac", "Kohane", role = c("aut")),
+    person("Tianxi", "Cai", role = c("aut"))
     )
 Description: divideconquer package reduces the computational burden of fitting large adaptive lasso for Cox model when n>>p, by divide and conquer, least square approximation, and one-step estimation.
 URL: https://github.com/celehs/dcalasso
