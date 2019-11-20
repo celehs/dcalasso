@@ -130,7 +130,7 @@ dat.mat0 = as.data.frame(SIM.FUN(N, p.x = p.x, cor = cor, family='Cox',beta0 = b
 dat.mat0[,'strat'] = rep(1:20, each = N/20)
 
 ## A Cox model, without stratification of baseline hazard: Surv(u,delta)~V3+V4+.....+V52
-# Using 1 core for computation, dividing the dataset to 10 chunks, using 2 iterations of one-step estimator for update
+# Example option 1: Using 1 core for computation, dividing the dataset to 10 chunks, using 2 iterations of one-step estimator for update
 mod = dcalasso(as.formula(paste0('Surv(u,delta)~',paste(paste0('V',3:52),collapse='+'))),
                family = 'cox.ph',data = dat.mat0,
                K = 10, iter.os = 2)
@@ -144,7 +144,7 @@ pred.term = predict(mod, newdata = dat.mat0, type = 'terms')
 pred.response = predict(mod, newdata = dat.mat0, type = 'response')
 
 
-# Same model as above: Using 2 cores for parallel computation, dividing the dataset to 10 chunks, using 4 iterations of one-step estimator for update
+# Example option 2: Same model as above: Using 2 cores for parallel computation, dividing the dataset to 10 chunks, using 4 iterations of one-step estimator for update
 modp = dcalasso(as.formula(paste0('Surv(u,delta)~',paste(paste0('V',3:52),collapse='+'))),
                 family = 'cox.ph',data = dat.mat0,
                 K = 10, iter.os = 4, ncores = 2)
@@ -161,7 +161,7 @@ plot(modp$coefficients.unpen, std$coefficients)
 
 
 ## A Cox model, with stratification of baseline hazard by "strat": Surv(u,delta)~strata(strat)+V3+V4+.....+V52
-# Using 1 core for computation, dividing the dataset to 10 chunks, using 2 iterations of one-step estimator for update
+# Example option 1: Using 1 core for computation, dividing the dataset to 10 chunks, using 2 iterations of one-step estimator for update
 mod = dcalasso(as.formula(paste0('Surv(u,delta)~strata(strat)+',paste(paste0('V',3:52),collapse='+'))),
                family = 'cox.ph',data = dat.mat0,
                K = 10, iter.os = 2)
@@ -169,7 +169,7 @@ sum.mod = summary(mod)
 print(sum.mod, unpen = T)
 plot(mod)
 
-# Same model as above: Using 2 cores for parallel computation, dividing the dataset to 10 chunks, using 4 iterations of one-step estimator for update
+# Example option 2: Same model as above: Using 2 cores for parallel computation, dividing the dataset to 10 chunks, using 4 iterations of one-step estimator for update
 modp = dcalasso(as.formula(paste0('Surv(u,delta)~strata(strat)+',paste(paste0('V',3:52),collapse='+'))),
                 family = 'cox.ph',data = dat.mat0,
                 K = 10, iter.os = 2, ncores = 2)
@@ -203,7 +203,7 @@ for (kk in 1: 10){
 }
 
 ## A Cox model, without stratification of baseline hazard: Surv(u,delta)~V3+V4+.....+V52
-# Using 1 core for computation, data.rds specifies that the data are saved into 10 files [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
+# Example option 1: Using 1 core for computation, data.rds specifies that the data are saved into 10 files [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
 mod = dcalasso(as.formula(paste0('Surv(u,delta)~',paste(paste0('V',3:52),collapse='+'))),
                family = 'cox.ph',
                data.rds = paste0(dir,'dataTI',1:10,'.rds'), iter.os = 2)
@@ -211,7 +211,7 @@ sum.mod = summary(mod)
 print(sum.mod, unpen = T)
 plot(mod)
 
-# Using 2 core for parallel computation, data.rds specifies that the data are saved into 10 files [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
+# Example option 2: Using 2 core for parallel computation, data.rds specifies that the data are saved into 10 files [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
 modp = dcalasso(as.formula(paste0('Surv(u,delta)~',paste(paste0('V',3:52),collapse='+'))),
                 family = 'cox.ph',
                 data.rds = paste0(dir,'dataTI',1:10,'.rds'), iter.os = 2, ncores = 2)
@@ -228,7 +228,7 @@ plot(modp$coefficients.unpen, std$coefficients)
 
 
 ## A Cox model, with stratification of baseline hazard by "strat": Surv(u,delta)~strata(strat)+V3+V4+.....+V52
-# Using 1 core for computation, loading data from 10 separate files (imply K=10) [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
+# Example option 1: Using 1 core for computation, loading data from 10 separate files (imply K=10) [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
 mod = dcalasso(as.formula(paste0('Surv(u,delta)~strata(strat)+',paste(paste0('V',3:52),collapse='+'))),
                family = 'cox.ph',
                data.rds = paste0(dir,'dataTI',1:10,'.rds'), iter.os = 2)
@@ -236,7 +236,7 @@ sum.mod = summary(mod)
 print(sum.mod, unpen = T)
 plot(mod)
 
-# Using 2 core for parallel computation, data.rds specifies that the data are saved into 10 files [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
+# Example option 2: Using 2 core for parallel computation, data.rds specifies that the data are saved into 10 files [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
 modp = dcalasso(as.formula(paste0('Surv(u,delta)~strata(strat)+',paste(paste0('V',3:52),collapse='+'))),
                 family = 'cox.ph',
                 data.rds = paste0(dir,'dataTI',1:10,'.rds'), iter.os = 2, ncores = 2)
@@ -265,7 +265,7 @@ dat.mat0[,'strat'] = dat.mat0[,dim(dat.mat0)[2]]%%(n.subject/20)
 dat.mat0 = dat.mat0[,-(dim(dat.mat0)[2]-1)]
 
 ## A time-dependent Cox model, without stratification of baseline hazard: Surv(t0,t1,status)~V4+V5+...+V103
-# Using 1 core for computation, dividing the data into 10 chunks, using 2 iterations of one-step estimator for update
+# Example option 1: Using 1 core for computation, dividing the data into 10 chunks, using 2 iterations of one-step estimator for update
 mod = dcalasso(as.formula(paste0('Surv(t0,t1,status)~',paste(paste0('V',4:103),collapse='+'))),
                family = 'cox.ph',data = dat.mat0,
                K = 10, iter.os = 2)
@@ -273,7 +273,7 @@ sum.mod = summary(mod)
 print(sum.mod, unpen = T)
 plot(mod)
 
-# Using 2 cores for parallel computation, dividing the data into 10 chunks, using 2 iterations of one-step estimator for update
+# Example option 2: Using 2 cores for parallel computation, dividing the data into 10 chunks, using 2 iterations of one-step estimator for update
 modp = dcalasso(as.formula(paste0('Surv(t0,t1,status)~',paste(paste0('V',4:103),collapse='+'))),
                 family = 'cox.ph',data = dat.mat0,
                 K = 10, iter.os = 2, ncores = 2)
@@ -289,7 +289,7 @@ plot(mod$coefficients.unpen, std$coefficients)
 plot(modp$coefficients.unpen, mod$coefficients.unpen)
 
 ## A time-dependent Cox model, with stratification of baseline hazard: Surv(t0,t1,status)~strata(strat)+V4+V5+...+V103
-# Using 1 core for computation, dividing the data into 10 chunks, using 4 iterations of one-step estimator for update
+# Example option 1: Using 1 core for computation, dividing the data into 10 chunks, using 4 iterations of one-step estimator for update
 mod = dcalasso(as.formula(paste0('Surv(t0,t1,status)~strata(strat)+',paste(paste0('V',4:103),collapse='+'))),
                family = 'cox.ph',data = dat.mat0,
                K = 10, iter.os = 4)
@@ -297,8 +297,7 @@ sum.mod = summary(mod)
 print(sum.mod, unpen = T)
 plot(mod)
 
-## A time-dependent Cox model, with stratification of baseline hazard: Surv(t0,t1,status)~strata(strat)+V4+V5+...+V103
-# Using 2 cores for parallel computation, dividing the data into 10 chunks, using 2 iterations of one-step estimator for update
+# Example option 2: Using 2 cores for parallel computation, dividing the data into 10 chunks, using 2 iterations of one-step estimator for update
 modp = dcalasso(as.formula(paste0('Surv(t0,t1,status)~strata(strat)+',paste(paste0('V',4:103),collapse='+'))),
                 family = 'cox.ph',data = dat.mat0,
                 K = 10, iter.os = 4, ncores = 2)
@@ -333,7 +332,7 @@ for (kk in 1: 10){
 
 
 ## A time-dependent Cox model, without stratification of baseline hazard: Surv(t0,t1,status)~V4+V5+...+V103
-# Using 1 core for computation, loading dataset from 10 chunks [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
+# Example option 1: Using 1 core for computation, loading dataset from 10 chunks [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
 mod = dcalasso(as.formula(paste0('Surv(t0,t1,status)~',paste(paste0('V',4:103),collapse='+'))),
                family = 'cox.ph',
                data.rds = paste0(dir,'dataTV',1:10,'.rds'), iter.os = 2)
@@ -341,7 +340,7 @@ sum.mod = summary(mod)
 print(sum.mod, unpen = T)
 plot(mod)
 
-# Using 2 cores for parallel computation, loading dataset from 10 chunks [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
+# Example option 2: Using 2 cores for parallel computation, loading dataset from 10 chunks [each time the RAM will only contain data from 1 file], using 2 iterations of one-step estimator for update
 modp = dcalasso(as.formula(paste0('Surv(t0,t1,status)~',paste(paste0('V',4:103),collapse='+'))),
                 family = 'cox.ph',
                 data.rds = paste0(dir,'dataTV',1:10,'.rds'), iter.os = 2, ncores = 2)
@@ -357,7 +356,7 @@ plot(mod$coefficients.unpen, std$coefficients)
 plot(modp$coefficients.unpen, mod$coefficients.unpen)
 
 ## A time-dependent Cox model, with stratification of baseline hazard: Surv(t0,t1,status)~strata(strat)+V4+V5+...+V103
-# Using 1 core for computation, loading dataset from 10 chunks [each time the RAM will only contain data from 1 file], using 4 iterations of one-step estimator for update
+# Example option 1: Using 1 core for computation, loading dataset from 10 chunks [each time the RAM will only contain data from 1 file], using 4 iterations of one-step estimator for update
 mod = dcalasso(as.formula(paste0('Surv(t0,t1,status)~strata(strat)+',paste(paste0('V',4:103),collapse='+'))),
                family = 'cox.ph',
                data.rds = paste0(dir,'dataTV',1:10,'.rds'), iter.os = 4)
@@ -365,7 +364,7 @@ sum.mod = summary(mod)
 print(sum.mod, unpen = T)
 plot(mod)
 
-# Using 2 cores for parallel computation, loading dataset from 10 chunks [each time the RAM will only contain data from 1 file], using 4 iterations of one-step estimator for update
+# Example option 2: Using 2 cores for parallel computation, loading dataset from 10 chunks [each time the RAM will only contain data from 1 file], using 4 iterations of one-step estimator for update
 modp = dcalasso(as.formula(paste0('Surv(t0,t1,status)~strata(strat)+',paste(paste0('V',4:103),collapse='+'))),
                 family = 'cox.ph',
                 data.rds = paste0(dir,'dataTV',1:10,'.rds'), K = 10, iter.os = 4, ncores = 2)
