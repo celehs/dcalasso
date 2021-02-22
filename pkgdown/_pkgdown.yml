@@ -1,13 +1,14 @@
 template:
   params:
-    bootswatch: spacelab
+    bootswatch: cosmo
 
 navbar:
   type: inverse
   left:
-    - text: "Home"
+    - icon: "fa-home"
       href: index.html
     - text: "Reference"
       href: reference/index.html
-    - text: "GitHub"
-      href: https://github.com/celehs/dcalasso
+  right:
+    - text: "CELEHS Software"
+      href: https://celehs.github.io

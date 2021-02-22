@@ -1,7 +1,7 @@
 Package: dcalasso
-Type: Package
-Title: Divide-and-conquer adaptive lasso for big data
-Version: 0.1.0
+Version: 0.1.1
+Title: Fast divide-and-conquer Cox proportional hazards model with adaptive lasso
+Description: divideconquer package reduces the computational burden of fitting large adaptive lasso for Cox model when n>>p, by divide and conquer, least square approximation, and one-step estimation.
 Authors@R: c(
     person("Yan", "Wang", role = c("aut", "cre"), email = "yaw719@mail.harvard.edu"),
     person("Chuan", "Hong", role = c("aut")),
@@ -11,7 +11,6 @@ Authors@R: c(
     person("Isaac", "Kohane", role = c("aut")),
     person("Tianxi", "Cai", role = c("aut"))
     )
-Description: divideconquer package reduces the computational burden of fitting large adaptive lasso for Cox model when n>>p, by divide and conquer, least square approximation, and one-step estimation.
 URL: https://github.com/celehs/dcalasso
 BugReports: https://github.com/celehs/dcalasso/issues
 License: GPL-3

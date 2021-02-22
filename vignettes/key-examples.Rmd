@@ -1,0 +1,83 @@
+---
+title: "Key Examples"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Key Examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Time-independent dataset 
+
+Fitting a Cox model for a time-independent dataset with 50 variables and 100,000 samples. 
+
+```{r, eval=FALSE}
+# Data simulation
+set.seed(1)
+N <- 1e5
+p.x <- 50
+K <- 100
+n <- N / K
+cor <- 0.2
+bb <- c(rep(0.4, 4), rep(0.2, 4), rep(0.1, 4), rep(0.05, 4))
+beta0 <- c(1, bb, rep(0, p.x - length(bb)))
+dat.mat0 <- as.data.frame(SIM.FUN(N, p.x = p.x, cor = cor, family = "Cox", beta0 = beta0))
+dat.mat0[, "strat"] <- rep(1:20, each = N / 20)
+
+# Model fitting
+modp <- dcalasso(as.formula(paste0("Surv(u,delta)~", paste(paste0("V", 3:52), collapse = "+"))),
+  family = "cox.ph", data = dat.mat0,
+  K = 10, iter.os = 4, ncores = 2
+)
+sum.modp <- summary(modp)
+print(sum.modp, unpen = T)
+plot(modp)
+```
+
+In this case, the dataset was loaded as a whole (<tt>data=dat.mat0</tt>). The same formulaic syntax for <tt>coxph</tt> applies here. For a time-independent dataset, two arguments are required: time and event.The dcalasso function internally divides it into 10 folds (<tt>K=10</tt>). The divide-and-conquer Cox estimate was estimated using 4 iterations of one-step updates (<tt>iter.os = 4</tt>), with the process paralleled to 2 CPUs (<tt>ncores = 2</tt>).
+  
+The print statement provides coefficients for both unpenalized estimate and adaptive LASSO estimate. The plot statement provides the relationship between the penalization factor <tt>lambda</tt> and model's Bayesian information criteria (BIC), which was the metric built in the package for variable selection.
+
+
+## Time-dependent dataset 
+
+Fitting a Cox model for a dataset with 50 time-dependent variables, 50 additional time-independent variables, and 100,000 samples. 
+
+```{r, eval=FALSE}
+# Data simulation
+set.seed(1)
+n.subject <- 1e5
+p.ti <- 50
+p.tv <- 50
+K <- 20
+n <- n.subject / K
+cor <- 0.2
+lambda.grid <- 10^seq(-10, 3, 0.01)
+beta0.ti <- NULL
+beta0.tv <- NULL
+dat.mat0 <- as.data.frame(SIM.FUN.TVC(p.ti, p.tv, n.subject, cor, beta0.ti, beta0.tv))
+dat.mat0[, "strat"] <- dat.mat0[, dim(dat.mat0)[2]] %% (n.subject / 20)
+dat.mat0 <- dat.mat0[, -(dim(dat.mat0)[2] - 1)]
+
+# Model fitting
+modp <- dcalasso(as.formula(paste0("Surv(t0,t1,status)~", paste(paste0("V", 4:103), collapse = "+"))),
+  family = "cox.ph", data = dat.mat0,
+  K = 10, iter.os = 2, ncores = 2
+)
+sum.modp <- summary(modp)
+print(sum.modp, unpen = T)
+plot(modp)
+```
+
+In this case, the dataset was loaded as a whole (<tt>data=dat.mat0</tt>). The same formulaic syntax for <tt>coxph</tt> applies here. For a time-dependent dataset, three arguments are required: start, end, and event. The dcalasso function internally divides it into 10 folds (<tt>K=10</tt>). The divide-and-conquer Cox estimate was estimated using 2 iterations of one-step updates (<tt>iter.os = 2</tt>), with the process paralleled to 2 CPUs (<tt>ncores = 2</tt>).
+  
+The print statement provides coefficients for both unpenalized estimate and adaptive LASSO estimate. The plot statement provides the relationship between the penalization factor <tt>lambda</tt> and model's Bayesian information criteria (BIC), which was the metric built in the package for variable selection.
+  
