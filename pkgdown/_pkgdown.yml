@@ -7,6 +7,10 @@ navbar:
   left:
     - icon: "fa-home"
       href: index.html
+    - text: "Key Examples"
+      href: articles/key-examples.html
+    - text: "Other Examples"
+      href: articles/other-examples.html      
     - text: "Reference"
       href: reference/index.html
   right:
