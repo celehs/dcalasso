@@ -1,6 +1,8 @@
 
 # dcalasso: Fast divide-and-conquer Cox proportional hazards model with adaptive lasso
 
+[![CRAN](https://www.r-pkg.org/badges/version/dcalasso)](https://CRAN.R-project.org/package=dcalasso)
+
 ## Questions that the package addresses
 
 The package answers the following questions:
@@ -57,7 +59,6 @@ Install development version from GitHub:
 ``` r
 # install.packages("remotes")
 install_github("celehs/dcalasso")
-require(dcalasso)
 ```
 
 ## Citation
